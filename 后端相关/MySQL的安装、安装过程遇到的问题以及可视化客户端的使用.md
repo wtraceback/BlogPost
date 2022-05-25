@@ -1,9 +1,9 @@
-### 1. 下载安装 MySQL
+## 1. 下载安装 MySQL
 **从 MySQL 官网下载最新的 MySQL Community Server 版本：**
 https://dev.mysql.com/downloads/mysql/
 
 
-### 2. 安装操作
+## 2. 安装操作
 我下载的是 ZIP 包的文件，因此需要下列的安装操作
 ```
 a. 解压
@@ -61,7 +61,7 @@ mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password';
 net stop mysql
 ```
 
-### 3. 安装 MySQL 过程中可能遇到的问题
+## 3. 安装 MySQL 过程中可能遇到的问题
 **在安装 MySQL 8 的时候，报了一个错误：**
     无法启动此程序，因为计算机中丢失 VCRUNTIME140_1.dll。尝试重新安装改程序以解决问题。
 
@@ -74,6 +74,6 @@ b. 下载安装 VC_redist.x64.exe
 a. 在 C:\Windows\System32 目录中不存在 VCRUNTIME140_1.dll 文件
 b. 安装完成后，就可以在 C:\Windows\System32 中找到文件 VCRUNTIME140_1.dll
 
-###4. MySQL 客户端 图形化管理工具（开源免费）
+## 4. MySQL 客户端 图形化管理工具（开源免费）
 **HeidiSQL    （有 安装版 和 免安装版）**
 https://www.heidisql.com/download.php

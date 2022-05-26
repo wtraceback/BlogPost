@@ -1,4 +1,4 @@
-## 1. 效果图
+### 1. 效果图
 
 最近学习了一下 Python 的 Pygame 模块，顺便做个小程序巩固所学的，运行效果如下：
 
@@ -7,7 +7,7 @@
 其中，背景图"highway.jpg"是使用PhotoShop将其分辨率改变为640 × 480，而小车"car.png"则是将其转变为png格式的图片，并且填充其背景色，让其拥有透明性。
 
 
-## 2. 源码
+### 2. 源码
 ```
 # -*- coding: utf-8 -*-
 
@@ -66,12 +66,12 @@ while True:
 ```
 
 
-## 3.素材图片
-#### highway.jpg
+### 3.素材图片
+**highway.jpg**
 
 ![highway.jpg](./pygame%E7%B3%BB%E5%88%97%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%9A%E7%A7%BB%E5%8A%A8%E7%9A%84%E5%B0%8F%E8%BD%A6.assets/202714_MLwN_2363215.jpg)
 
 
-#### car.png
+**car.png**
 
 ![car.png](./pygame%E7%B3%BB%E5%88%97%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%9A%E7%A7%BB%E5%8A%A8%E7%9A%84%E5%B0%8F%E8%BD%A6.assets/202757_XFux_2363215.png)

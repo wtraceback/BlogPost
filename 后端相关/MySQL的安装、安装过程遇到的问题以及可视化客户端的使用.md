@@ -1,9 +1,9 @@
-## 1. 下载安装 MySQL
+### 1. 下载安装 MySQL
 **从 MySQL 官网下载最新的 MySQL Community Server 版本：**
 https://dev.mysql.com/downloads/mysql/
 
 
-## 2. 安装操作
+### 2. 安装操作
 我下载的是 ZIP 包的文件，因此需要下列的安装操作
 ```
 a. 解压
@@ -12,12 +12,12 @@ c. 自定义一个 my.ini 文件
 d. 以管理员的身份运行 cmd，然后切换到对应的目录下，执行安装 MySQL 执行
 ```
 
-**1) 将下载好的 MySQL ZIP 包解压到自己想要放置的目录中**
+#### （1） 将下载好的 MySQL ZIP 包解压到自己想要放置的目录中
 
-**2) 配置环境变量**
+#### （2） 配置环境变量
 我的电脑 --> 属性 --> 高级系统设置 --> 环境变量 --> 系统变量 --> Path --> 将解压后的 MySQL 里的 bin 目录的绝对路径添加到环境变量中
 
-**3) 创建一个名为 my.ini 的配置文件，存放在 MySQL 安装的根目录（跟 bin 目录同级），文件格式如下：**
+#### （3） 创建一个名为 my.ini 的配置文件，存放在 MySQL 安装的根目录（跟 bin 目录同级），文件格式如下：
 - my.ini 配置文件里面的内容如下：
 ```
 [client]
@@ -41,7 +41,7 @@ default-storage-engine=INNODB
 a. *一个是解压后的 MySQL 的路径（basedir 设置为解压后的 MySQL 在自己电脑上的目录）*
 b. *一个是需要放置 MySQL 数据相关的路径（MySQL 8+ 版本不需要设置）*
 
-**4) 以管理员的身份运行 cmd 命令行工具，然后通过命令行切换到 MySQL 解压后的 bin 目录里面**
+#### （4） 以管理员的身份运行 cmd 命令行工具，然后通过命令行切换到 MySQL 解压后的 bin 目录里面
 ```
 # a. 执行安装命令：
 mysqld install
@@ -61,7 +61,7 @@ mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password';
 net stop mysql
 ```
 
-## 3. 安装 MySQL 过程中可能遇到的问题
+### 3. 安装 MySQL 过程中可能遇到的问题
 **在安装 MySQL 8 的时候，报了一个错误：**
     无法启动此程序，因为计算机中丢失 VCRUNTIME140_1.dll。尝试重新安装改程序以解决问题。
 
@@ -74,6 +74,6 @@ b. 下载安装 VC_redist.x64.exe
 a. 在 C:\Windows\System32 目录中不存在 VCRUNTIME140_1.dll 文件
 b. 安装完成后，就可以在 C:\Windows\System32 中找到文件 VCRUNTIME140_1.dll
 
-## 4. MySQL 客户端 图形化管理工具（开源免费）
+### 4. MySQL 客户端 图形化管理工具（开源免费）
 **HeidiSQL    （有 安装版 和 免安装版）**
 https://www.heidisql.com/download.php

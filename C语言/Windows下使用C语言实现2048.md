@@ -1,13 +1,13 @@
 这是我之前写的一个小游戏，在windows下的Dev-C++中用C语言来实现的，通过不断的清屏，打印，清屏，打印来实现动态效果，不过功能不完善，有几个缺陷的地方。
 
-## 1. 实现效果（使用 w a s d 四个键来控制上下左右的移动） ：
+### 1. 实现效果（使用 w a s d 四个键来控制上下左右的移动） ：
 
 ![实现效果](./Windows%E4%B8%8B%E4%BD%BF%E7%94%A8C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B02048.assets/175613_xWkJ_2363215.gif)
 
 源代码（如果在Dev-C++中编译运行的时候报错，请将注释符号 <font color='red'> // </font> 换为 <font color='red'> /**/ </font> 来进行注释）：
 
 
-## 2. 源码
+### 2. 源码
 ```
 #include <stdio.h>
 #include <stdlib.h>     // for rand() and srand() and exit()

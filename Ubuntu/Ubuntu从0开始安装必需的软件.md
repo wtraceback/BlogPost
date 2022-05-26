@@ -1,7 +1,7 @@
 我安装的Linux版本是ubuntu 16.04的英文版的（至于为什么安装英文版的，我最初的想法是平常查询的官方文档都是英文的，使用谷歌搜索出来的东西也基本都是英文的居多，还有许多平常使用的网站都是全英文的，英语水平很重要，所以尽量使自己处于全英文的状态下使得英语水平慢慢提升）。当进入ubuntu中，发现什么都是最初始的，什么都时未设置的，因此平常中需要的很多软件都得需要自己安装。
 
 
-## 1. 更新软件源：
+### 1. 更新软件源：
 首先我们需要先更新ubuntu中的软件源，使用以下命令：
 
 ```
@@ -9,7 +9,7 @@ sudo apt-get install update
 ```
 
 
-## 2. System Settings显示：
+### 2. System Settings显示：
 1) 一开始点击右上角的System Settings是不能够显示出系统设置界面的，因此运行通过以下命令来使其显示：
 
 ```
@@ -25,7 +25,7 @@ sudo apt-get install ubuntu-desktop
 3) 如果上面两条命令都执行了，点击后还是不能显示的话，则需要重启一下，重启后就可以显示了。
 
 
-## 3. 安装 fcitx：
+### 3. 安装 fcitx：
 由于我安装的ubuntu版本一开始是没有中文输入法的，而且我使用的是双拼输入法，因此需要安装fcitx，安装fcitx通过以下命令：
 
 ```
@@ -58,7 +58,7 @@ sudo apt-get install fcitx-table-wbpy
 
 
 
-## 4. 安装搜狗输入法：
+### 4. 安装搜狗输入法：
 如果需要安装搜狗输入法，则打开浏览器去搜狗拼音输入法的官网中下载linux版的输入法，至于搜狗输入法官网中的安装指南，可以不需要按照其来。
 
 但我们把搜狗输入法的 deb 软件包下载下来后，双击搜狗输入法的deb软件包进行安装时，可能会报错（“This software comes from a 3rd party and may contain non-free components”），当出现报错时，则终端运行以下命令：
@@ -74,7 +74,7 @@ sudo apt install gdebi
 
 
 
-## 5. 安装flash：
+### 5. 安装flash：
 由于在ubuntu下有时候需要看动漫，然后打开默认的火狐浏览器时，一开始时不能看视频的，需要安装flash，运行一下命令即可：
 
 ```
@@ -86,7 +86,7 @@ sudo apt-get install flashplugin-nonfree
 
 
 
-## 6. 同步win7和ubuntu两个系统的时间：
+### 6. 同步win7和ubuntu两个系统的时间：
 当你安装了双系统
 >1）当你在 win7 下显示的是正常时间
 >2）关机进入 ubuntu 之后，ubuntu 会自动更换时间，这时 ubuntu 显示的也会是正常时间（一开始可能时间不对，不过等级分钟会自动更新为正常时间）

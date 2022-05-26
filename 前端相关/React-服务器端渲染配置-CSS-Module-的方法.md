@@ -1,11 +1,11 @@
-##### 模块的版本
+### 1. 模块的版本
 ```
 "css-loader": "^6.3.0",
 "isomorphic-style-loader": "^5.3.2",
 "style-loader": "^3.3.0"
 ```
 
-##### 1. 客户端 CSS 的 webpack 配置
+### 2. 客户端 CSS 的 webpack 配置
 ```
 {
     module: {
@@ -29,7 +29,7 @@
 
 ```
 
-##### 2. 服务器端 CSS 的 webpack 配置
+### 3. 服务器端 CSS 的 webpack 配置
 ```
 {
     module: {

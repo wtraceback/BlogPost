@@ -5,7 +5,7 @@
 首先我们需要先更新ubuntu中的软件源，使用以下命令：
 
 ```
-sudo apt-get install update
+sudo apt-get update
 ```
 
 

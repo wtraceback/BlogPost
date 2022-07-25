@@ -7,7 +7,7 @@
 
 ### 3. 代码示例
 #### （1） 示例一
-```html
+```js
 <Modal
     destroyOnClose={true}
 >
@@ -18,7 +18,7 @@
 ```
 
 #### （2） 示例二
-```html
+```js
 <Modal
     destroyOnClose={true}
 >
@@ -26,4 +26,38 @@
         ref={ (input) => input && input.focus() }
     />
 </Modal>
+```
+
+
+#### （3） 示例三
+将要聚焦的元素封装成一个组件中，然后在 Modal 中调用这个组件，这样就可以在新的组件中为 DOM 元素 \<input> 添加 ref
+```js
+<Modal
+    destroyOnClose={true}
+>
+    <PersonalInput />
+</Modal>
+
+
+class PersonalInput extends React.Component {
+    constructor(props) {
+        super(props)
+        this.inputRef = React.createRef()
+    }
+
+    componentDidMount() {
+        // 打开的时候就自动聚焦
+        console.log("inputRef = ", this.inputRef)
+        this.inputRef.current.focus()
+    }
+
+    render() {
+        return (
+            <input
+                type="text"
+                ref={this.inputRef}
+            />
+        )
+    }
+}
 ```

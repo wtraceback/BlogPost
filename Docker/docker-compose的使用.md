@@ -183,6 +183,17 @@ services:
 - ```redis``` 由于已经在本地下载了 redis，而且版本为 latest，所以该 redis 服务使用本地的 redis 镜像。如果本地不存在该镜像，它将会自动去 ```Docker Hub``` 拉取公共 Redis 镜像
 
 ### 7. docker-compose 的启动、查看、停止
+当前目录结构为：
+```
+├── composetest
+│   ├── app.py
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+```
+
+docker-compose 的启动、查看、停止
+> 提示：以下三个命令的操作，都得在之前创建好的 composetest 目录下进行
+
 ```
 # 后台启动 docker-compose
 $ docker-compose up -d

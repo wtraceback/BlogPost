@@ -137,7 +137,7 @@ insert into scores values('07', '03', 98);
 
 [13. 按平均成绩从高到低显示所有学生的所有课程的成绩以及平均成绩](#id-13)
 
-[14. 查询各科成绩最高分、最低分和平均分：以如下形式显示：课程 ID，课程 name，最高分，最低分，平均分，及格率，中等率，优良率，优秀率及格为>=60，中等为：70-80，优良为：80-90，优秀为：>=90](#id-14)
+[14. 查询各科成绩最高分、最低分和平均分：以如下形式显示：课程 ID，课程 name，最高分，最低分，平均分，及格率，中等率，优良率，优秀率；（及格为>=60，中等为：70-80，优良为：80-90，优秀为：>=90）](#id-14)
 
 [15. 按各科成绩进行排序，并显示排名， Score 重复时保留名次空缺](#id-15)
 
@@ -310,7 +310,6 @@ and course_id in (select course_id from scores where student_id='01'));
 ```
 
 #### <span id="id-9">（9）</span> 查询和" 01 "号的同学学习的课程完全相同的其他同学的信息
-以下两个写法是网上看别人写的，自己水平还是不够啊
 （思路：
     计算被查询者的课程总数，找出相同总数课程的人；
     筛选出被查询者没学过的课程，过滤掉学过该课程的人）
@@ -335,6 +334,22 @@ SELECT t3.* FROM (select student_id, group_concat(course_id ORDER BY course_id) 
 INNER JOIN (SELECT group_concat(course_id ORDER BY course_id) as group2
                 FROM scores WHERE student_id = '01' GROUP BY student_id) as t2 ON t1.group1 = t2.group2
 INNER JOIN students t3 ON t1.student_id = t3.id;
+```
+
+第三种写法
+```sql
+select *
+from students
+where id in (
+    select student_id
+    from scores
+    group by student_id
+    having count(course_id) = (
+            select count(course_id) as course_count
+            from scores
+            where student_id='01'
+        ) and student_id<>'01'
+)
 ```
 
 #### <span id="id-10">（10）</span> 查询没学过"张三"老师讲授的任一门课程的学生姓名
@@ -387,8 +402,9 @@ ORDER BY 平均分 DESC;
 ```
 
 #### <span id="id-14">（14）</span> 查询各科成绩最高分、最低分和平均分：
-以如下形式显示：课程 ID，课程 name，最高分，最低分，平均分，及格率，中等率，优良率，优秀率
-及格为>=60，中等为：70-80，优良为：80-90，优秀为：>=90
+以如下形式显示：
+课程 ID，课程 name，最高分，最低分，平均分，及格率，中等率，优良率，优秀率；
+（及格为>=60，中等为：70-80，优良为：80-90，优秀为：>=90）
 ```sql
 select a.course_id, co.name, max(a.score) as 最大值, min(a.score) as 最小值, count(a.student_id) as 人数, round(avg(a.score), 2) as 平均分,
 CONCAT(ROUND(100*(sum(case when a.score >= 60 then 1 else 0 end) / count(a.student_id)), 2), '%') as 及格率,

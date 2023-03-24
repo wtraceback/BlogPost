@@ -526,6 +526,9 @@ shutdown now
 
 ## （七） Nginx 原理
 ### 1. Nginx 的工作原理
+- ```/etc/nginx/nginx.conf``` 主配置文件中指定要生成的 ```worker``` 数
+![](Nginx学习总结.assets/主配置文件中指定要生成的worker数.png)
+- 实际启动后的相关进程
 ![](Nginx学习总结.assets/Nginx的工作原理2.png)
 
 master 进程充当一个管理者，当客户端发送一个请求到服务器端，nginx 的 master 进程接收到请求之后，就通知 worker 进程，客户端那边有请求过来，然后各个 worker 去争抢请求的处理，当某个 worker 抢夺到请求之后，如果是静态文件相关的请求，则 nginx 的 workder 进程直接进行处理，如果是动态请求，则将请求转发到反向代理对应的 web 服务器中，由 web 服务器去处理。

@@ -282,6 +282,19 @@ supervisorctl stop all      # 停止全部进程
 ```
 更详细的信息请查看 [supervisor文档](http://supervisord.org/)
 
+#### （6） supervisor 的卸载
+```
+# 1. 使用命令卸载
+sudo apt purge supervisor
+
+# 2. 查看是否还有遗留目录或文件
+whereis supervisor
+# 或
+whereis supervisord
+
+# 3. 如果查找到还有遗留的目录或文件，则删除它
+rm -rf supervisor的目录
+```
 
 ### 6. 总结
 以上的操作和配置都是相对简单的，如果项目中有更多复杂的操作，请查看相关的官方文档，进行更完善的配置。

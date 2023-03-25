@@ -16,31 +16,36 @@ docker images
 ### 3. 运行镜像（使用 mysql:latest 镜像创建容器）
 在宿主机的根目录中创建挂载目录
 ```
-mkdir -p /mysql/conf            # mysql 的配置目录
-mkdir -p /mysql/logs            # mysql 的日志目录
-mkdir -p /mysql/data            # mysql 的数据目录
+mkdir -p /docker/mysql/conf            # mysql 的配置目录
+mkdir -p /docker/mysql/logs            # mysql 的日志目录
+mkdir -p /docker/mysql/data            # mysql 的数据目录
 ```
 
 使用 mysql:latest 镜像创建容器
 ```
-docker run -p 3306:3306 --name mysql -v /mysql/conf:/etc/mysql/conf.d -v /mysql/logs:/logs -v /mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest
+docker run -p 3306:3306 --name mysql -v /docker/mysql/conf:/etc/mysql/conf.d -v /docker/mysql/logs:/logs -v /docker/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest
+
+# 或额外添加 privileged 配置
+docker run -p 3306:3306 --name mysql -v /docker/mysql/conf:/etc/mysql/conf.d -v /docker/mysql/logs:/logs -v /docker/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:latest  --privileged=true
 ```
 命令说明：
 - ```-p 3306:3306```
 将宿主机的 3306 端口映射到 docker 容器的 3306 端口，格式为：主机(宿主)端口:容器端口
 - ```--name mysql```
 运行服务的名字
-- ```-v /mysql/conf:/etc/mysql/conf.d```
-将宿主机 ```/mysql``` 目录下的 ```/conf``` 挂载到容器的 ```/etc/mysql/conf.d```
-- ```-v /mysql/logs:/logs```
-将宿主机 ```/mysql``` 目录下的 ```/logs``` 目录挂载到容器的 ``` /logs```
-- ```-v /mysql/data:/var/lib/mysql```
-将宿主机 ```/mysql``` 目录下的 ```/data``` 目录挂载到容器的 ```/var/lib/mysql```
+- ```-v /docker/mysql/conf:/etc/mysql/conf.d```
+将宿主机 ```/docker/mysql``` 目录下的 ```/conf``` 挂载到容器的 ```/etc/mysql/conf.d```
+- ```-v /docker/mysql/logs:/logs```
+将宿主机 ```/docker/mysql``` 目录下的 ```/logs``` 目录挂载到容器的 ``` /logs```
+- ```-v /docker/mysql/data:/var/lib/mysql```
+将宿主机 ```/docker/mysql``` 目录下的 ```/data``` 目录挂载到容器的 ```/var/lib/mysql```
 - ```-e MYSQL_ROOT_PASSWORD=123456```
 初始化 ```root``` 用户的密码为 ```123456```
 - ```-d mysql:latest```
 后台程序运行 ```mysql```
-
+- ```--privileged=true``` 开启特殊权限
+Docker 挂载主机目录时（添加容器数据卷），如果 Docker 访问出现 ```cannot open directory:Permission denied```，在挂载目录的命令后多加一个 --privileged=true 参数即可。
+因为出于安全原因，容器不允许访问任何设备，```privileged``` 让 docker 应用容器获取宿主机 ```root``` 权限（特殊权限），允许我们的 Docker 容器访问连接到主机的所有设备。容器获得所有能力，可以访问主机的所有设备，例如，CD-ROM、闪存驱动器、连接到主机的硬盘驱动器等。
 
 运行效果：
 ![](使用Docker安装并启动MySQL.assets/使用mysql镜像创建容器.png)
@@ -53,7 +58,7 @@ docker run -p 3306:3306 --name mysql -v /mysql/conf:/etc/mysql/conf.d -v /mysql/
 
 ### 5. 数据备份
 ```
-docker exec myql服务容器ID sh -c ' exec mysqldump --all-databases -uroot -p"123456" ' > /mysql/all-databases.sql
+docker exec myql服务容器ID sh -c ' exec mysqldump --all-databases -uroot -p"123456" ' > /docker/mysql/all-databases.sql
 ```
 
 ![](使用Docker安装并启动MySQL.assets/数据备份.png)

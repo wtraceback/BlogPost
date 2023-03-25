@@ -76,6 +76,7 @@ app = Flask(__name__)
 # flask-redis 的配置和初始化
 # 说明：Redis 服务启动后默认有 16 个数据库，编号分别是从 0 到 15，这边连接的是 0 号数据库
 # 这边的 REDIS_URL 中的主机名必须使用 redis，使用 localhost 或者是 127.0.0.1 的话都不能连接上 redis
+# REDIS_URL = "redis://用户名:密码@主机:端口/Redis默认的n号数据库" --> 在 Redis 6.0 之前的版本中，登陆Redis Server只需要输入密码（前提配置了密码 requirepass ）即可，不需要输入用户名
 app.config['REDIS_URL'] = 'redis://:123456@redis:6379/0'
 redis_client = FlaskRedis(app)
 

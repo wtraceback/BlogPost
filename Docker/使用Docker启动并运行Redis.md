@@ -48,22 +48,33 @@ appendonly yes
 
 ### 3. docker run 运行 redis 镜像
 ```
-docker run --name redis -p 6379:6379 -v /docker/redis/redis.conf:/etc/redis/redis.conf -v /docker/redis/data:/data -d redis redis-server /etc/redis/redis.conf --appendonly yes
+docker run --name redis -p 6379:6379 \
+-v /docker/redis/redis.conf:/etc/redis/redis.conf \
+-v /docker/redis/data:/data \
+-d redis \
+redis-server /etc/redis/redis.conf \
+--appendonly yes
 
 # 或额外添加 privileged 配置
-docker run --name redis -p 6379:6379 -v /docker/redis/redis.conf:/etc/redis/redis.conf -v /docker/redis/data:/data -d redis redis-server /etc/redis/redis.conf --appendonly yes --privileged=true
+docker run --name redis -p 6379:6379 \
+--privileged=true \
+-v /docker/redis/redis.conf:/etc/redis/redis.conf \
+-v /docker/redis/data:/data \
+-d redis \
+redis-server /etc/redis/redis.conf \
+--appendonly yes
 ```
 
 命令说明：
 - ```--name redis``` 为容器指定一个名称，查看和进行操作都比较方便。
 - ```-p 6379:6379``` 指定端口映射，格式为：```主机(宿主)端口:容器端口```
+- ```--privileged=true``` 开启特殊权限
+Docker 挂载主机目录时（添加容器数据卷），如果 Docker 访问出现 ```cannot open directory:Permission denied```，在挂载目录的命令后多加一个 --privileged=true 参数即可。
+因为出于安全原因，容器不允许访问任何设备，```privileged``` 让 docker 应用容器获取宿主机 ```root``` 权限（特殊权限），允许我们的 Docker 容器访问连接到主机的所有设备。容器获得所有能力，可以访问主机的所有设备，例如，CD-ROM、闪存驱动器、连接到主机的硬盘驱动器等。
 - ```-v``` 挂载文件或目录：前面是宿主机部分，后面是容器部分
 - ```-d redis``` 表示后台启动 redis；使用此方式启动，则 redis.conf 中 daemonize 必须设置为 no，否则会无法启动
 - ```redis-server /etc/redis/redis.conf```  在容器内启动 redis-server 的命令，用于加载容器内的 conf 文件，最终找到的是挂载的目录 /docker/redis/redis.conf。
 - ```--appendonly yes``` 开启 redis 持久化
-- ```--privileged=true``` 开启特殊权限
-Docker 挂载主机目录时（添加容器数据卷），如果 Docker 访问出现 ```cannot open directory:Permission denied```，在挂载目录的命令后多加一个 --privileged=true 参数即可。
-因为出于安全原因，容器不允许访问任何设备，```privileged``` 让 docker 应用容器获取宿主机 ```root``` 权限（特殊权限），允许我们的 Docker 容器访问连接到主机的所有设备。容器获得所有能力，可以访问主机的所有设备，例如，CD-ROM、闪存驱动器、连接到主机的硬盘驱动器等。
 
 ### 4. 查看 redis 运行的状态
 ```

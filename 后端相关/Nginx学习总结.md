@@ -444,6 +444,8 @@ touch nginxdemo.conf
 [program:nginxdemo]     ; 被管理的进程配置参数，nginxdemo 是进程的名称，使用 supervisorctl 来管理进程时需要使用该进程名
 
 command=/usr/sbin/nginx -g 'daemon off;' # 需要执行的命令
+# nginx 的启动命令默认是后台启动（daemon on; 以守护进程运行），supervisor不能监控后台程序，所以当 nginx 以守护进程的方式启动时，supervisor 检测不到 nginx 的启动，就会一直执行 nginx 的启动命令，不断的启动 Nginx，最后可能还会报错。 加上 -g 'daemon off;' 这个参数可解决这问题。
+# 额外说明：在容器环境，容器要能持续运行，至少有一个前台进程在运行，所以对nginx进程容器化，需要将 nginx 转为前台进程( daemon off)。当然，nginx 的官方镜像 Dockerfile 已经指定 nginx -g "daemon off;"
 
 autostart=true          ; 在 supervisor 启动的时候也自动启动
 

@@ -60,11 +60,19 @@ docker run -p 3306:3306 --name mysql \
 -v /docker/mysql/conf:/etc/mysql/conf.d \
 -v /docker/mysql/logs:/var/log/mysql \
 -v /docker/mysql/data:/var/lib/mysql \
--v /docker/mysql/mysql-files:/var/lib/mysql-files/
 -e MYSQL_ROOT_PASSWORD=123456 \
 -d \
 --privileged=true \
 mysql:latest
+
+
+
+# -v /docker/mysql/conf:/etc/mysql/conf.d \
+# 上面这行的“挂载配置文件”可更换为下面的这行
+# -v /docker/mysql/conf/my.cnf:/etc/mysql/my.cnf \
+
+# 可加可不加的一行
+# -v /docker/mysql/mysql-files:/var/lib/mysql-files/ \
 ```
 命令说明：
 - ```-p 3306:3306```

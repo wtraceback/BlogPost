@@ -3,8 +3,12 @@
 2. 在 docker 开发中，我们应该遵循每个容器只做一件事的原则
 3. 我们运行两个容器，一个用于运行 flask 应用，一个用于运行 redis
 
-## （二） flask 应用和 redis
-### 1. flask 应用
+## （二） redis 和 flask 应用
+
+### 1. Docker 运行 redis
+具体的操作请参考之前的博客：[使用Docker启动并运行Redis](https://www.cnblogs.com/wanghuizhao/p/17124637.html)
+
+### 2. flask 应用
 具体的操作请参考之前的博客：
 - [在 Flask 中使用 Redis 来缓存数据](https://www.cnblogs.com/wanghuizhao/p/17124629.html)
 - [使用Docker启动并运行Flask应用](https://www.cnblogs.com/wanghuizhao/p/17132229.html)
@@ -101,8 +105,17 @@ def get_data(id):
         return jsonify({})
 ```
 
-### 2. Docker 运行 redis
-具体的操作请参考之前的博客：[使用Docker启动并运行Redis](https://www.cnblogs.com/wanghuizhao/p/17124637.html)
+### 3. 构建 flask 应用的镜像
+利用 ```docker build``` 命令构建镜像
+
+```bash
+docker build -t="flask_demo" .
+或
+docker build -t flask_demo .
+```
+命令说明
+- ```-t``` 用来指定新镜像的用户信息、名字、版本等
+- ```.``` 命令最后的 点 表示在当前目录寻找 Dockerfile 文件
 
 ## （三） 将这两个容器相互连接
 ```

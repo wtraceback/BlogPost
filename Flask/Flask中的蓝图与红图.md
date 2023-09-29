@@ -139,7 +139,7 @@ class Redprint():
             url_prefix = '/' + self.name
         for f, rule, options in self.mound:
             # 仿照 Blueprint 中 route 方法的写法
-            endpoint = options.pop("endpoint", f.__name__)
+            endpoint = self.name + '+' + options.pop('endpoint', f.__name__)
             bp.add_url_rule(url_prefix + rule, endpoint, f, **options)
 ```
 
@@ -194,6 +194,8 @@ register_blueprints(app)
 
 
 if __name__ == '__main__':
+    # 通过 url_map 可以查看整个 flask 中的路由信息
+    print(app.url_map)
     app.run(debug=True)
 ```
 这样，所有注册到 ```'v1'``` ```Blueprint``` 的 ```Redprint``` 都会拥有 ```'/v1'``` 这个 ```URL``` 前缀。如果想要改变这个前缀，只需要在 ```app.register_blueprint``` 中修改它即可。

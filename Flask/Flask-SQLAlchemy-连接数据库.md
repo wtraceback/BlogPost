@@ -63,10 +63,9 @@ def initdb(drop):
 ```
 
 ### 3. 创建数据库表的相关说明
-- 模型类创建后，还不能对数据库进行操作，因为我们还没有创建表和数据库文件
-- 由于已经自定义了命令来创建数据库表，因此不需要通过 ```flask shell``` 进入交互模式，手动导入相关模块，接着手动创建数据库表
-- 在命令行下，使用命令 ```flask initdb``` 就可以创建数据库表了
-- 连接 SQLite 的情况下，如果本地不存在对应的数据库文件，那么 Flask-SQLAlchemy 将会先自动的创建数据库文件，然后再创建数据库表
+1. 已经自定义了命令来创建数据库表，因此**不需要**通过 ```flask shell``` 进入交互模式去手动导入相关模块、手动创建数据库表
+2. 在命令行下，使用命令 ```flask initdb``` 就可以创建数据库表了
+3. 如果连接的是 SQLite 数据库，如果本地不存在对应的数据库文件，那么 Flask-SQLAlchemy 将会先自动的创建数据库文件，然后再创建数据库表（说明：SQLite 的数据库文件名就是数据库名）
 
 
 ## （三） 连接 MySQL
@@ -111,6 +110,10 @@ class User(db.Model):
 @click.option('--drop', is_flag=True, help='Create after drop.')
 def initdb(drop):
     if drop:
+        # 如果是 sqlite 数据库，则 db.create_all() 函数会创建数据库文件以及数据库表
+        # 如果是 mysql 数据库，需要提前手动创建数据库，db.create_all() 函数只能创建数据库表：
+        #   连接 mysql 时，db.create_all() 方法不会创建数据库本身，它只是基于 SQLAlchemy 模型在已经存在的数据库中创建表。
+        #   如果数据库不存在，尝试运行 db.create_all() 将会引发错误，因为它无法连接到一个不存在的数据库。
         db.drop_all()
     db.create_all()
 

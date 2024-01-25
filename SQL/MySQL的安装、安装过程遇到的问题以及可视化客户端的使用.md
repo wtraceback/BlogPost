@@ -22,18 +22,18 @@ d. 以管理员的身份运行 cmd，然后切换到对应的目录下，执行�
 ```
 [client]
 # 设置 MySQL 客户端默认字符集
-default-character-set=utf8
+default-character-set=utf8mb4
 [mysqld]
 # 设置 3306 端口
 port = 3306
 # 设置 mysql 的安装目录
-basedir=C:\web\mysql-8.0.20
+basedir=C:\\web\\mysql-8.0.20
 # 设置 mysql数据库的数据的存放目录，MySQL 8+ 不需要以下配置，系统自己生成即可，否则有可能报错
 # datadir=C:\\web\\sqldata
 # 允许最大连接数
 max_connections=200
-# 服务端使用的字符集默认为 8 比特编码的 latin1 字符集
-character-set-server=utf8
+# 服务端使用的字符集默认为 utf8mb4
+character-set-server=utf8mb4
 # 创建新表时将使用的默认存储引擎
 default-storage-engine=INNODB
 ```
@@ -43,21 +43,34 @@ b. *一个是需要放置 MySQL 数据相关的路径（MySQL 8+ 版本不需要
 
 #### （4） 以管理员的身份运行 cmd 命令行工具，然后通过命令行切换到 MySQL 解压后的 bin 目录里面
 ```
-# a. 执行安装命令：
+# 1. 执行安装命令：
 mysqld install
-# b. 初始化数据库：（执行完成后，会输出 root 用户的初始默认密码）
+
+# 2. 初始化数据库：（执行完成后，会输出 root 用户的初始默认密码）
 mysqld --initialize --console
-# c. 启动 MySQL 服务器命令：（如果不初始化，有可能在启动时存在启动不了的问题）
+
+# 3. 启动 MySQL 服务器命令：（如果不初始化，有可能在启动时存在启动不了的问题）
 net start mysql
-# d. 连接到本机的 MySQL 服务器
+
+# 3.1 如果运行 net start mysql 提示“发生系统错误 2。找不到指定文件”，则依次运行下面的命令：
+    mysqld --remove
+    mysqld --install
+    net start mysql
+
+# 4. 连接到本机的 MySQL 服务器
 mysql -u root -p
 输入上面初始化过程中生成的临时密码（第二步），如果一切正确，就会连接到 MySQL 服务器，同时提示符变为 mysql>
-# e. 退出 MySQL 命令行
+
+# 5. 退出 MySQL 命令行
 mysql> exit
+或
 mysql> quit
-# f. 修改密码
+
+# 6. 修改密码
 mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password';
-# g. 停止 MySQL 服务器命令
+# mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
+
+# 7. 停止 MySQL 服务器命令
 net stop mysql
 ```
 
